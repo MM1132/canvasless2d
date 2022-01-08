@@ -31,6 +31,15 @@ export default class Menu {
         this.hide()
     }
 
+    get particleCount() {
+        let sum = 0
+        sum += this.#fountainManager.particleCount
+        for(let i of Object.keys(this.#pages)) {
+            sum += this.#pages[i].particleCount
+        }
+        return sum
+    }
+
     switchPage = newPage => {
         this.#pages[this.#activePage].hide()
         this.#activePage = newPage

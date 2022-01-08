@@ -1,7 +1,10 @@
 // All the default values for the particle and the fountain
 export const DEFAULT_DATA = {
+    pre: {
+        count: 0
+    },
     fountain: {
-        const: {
+        con: {
             chance: 1,
             count: 1
         },
@@ -21,6 +24,8 @@ export const DEFAULT_DATA = {
                 x: 0,
                 y: 0
             },
+            angle: 0,
+            speed: 0,
             color: {
                 start: "rgb(0, 0, 0)",
                 end: "rgb(0, 0, 0)",
@@ -28,7 +33,7 @@ export const DEFAULT_DATA = {
             },
             blur: 0
         },
-        const: {
+        con: {
             size: 0,
             pos: {
                 x: 0,
@@ -39,6 +44,7 @@ export const DEFAULT_DATA = {
                 y: 0
             },
             blur: 0
-        }
+        },
+        newData: null
     }
 }

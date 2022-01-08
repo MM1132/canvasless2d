@@ -244,55 +244,53 @@ export let archData = {
 export let explosionData = {
     type: "fountain",
     pre: {
-        amount: 1,
-        chance: 1,
-        spawnsLeft: 0,
-        startAmount: 25
+        count: 25
     },
-    spawn: {
-        size: {
-            min: 10,
-            max: 15
-        },
-        pos: {
-            x: 500,
-            y: 550
-        },
-        life: {
-            min: 30,
-            max: 50
-        },
-        angle: {
-            min: 0,
-            max: 360
-        },
-        speed: {
-            min: 0.2,
-            max: 7
-        },
-        color: {
-            start: "rgb(255, 220, 60)",
-            end: "rgb(75, 255, 160)",
+    fountain: {
+        val: {
+            spawnsLeft: 0
+        }
+    },
+    particle: {
+        val: {
+            size: {
+                min: 10,
+                max: 15
+            },
+            pos: {
+                x: 500,
+                y: 550
+            },
+            life: {
+                min: 30,
+                max: 50
+            },
+            angle: {
+                min: 0,
+                max: 360
+            },
             speed: {
-                min: 0.03,
-                max: 0.06
+                min: 0.2,
+                max: 7
+            },
+            color: {
+                start: "rgb(255, 220, 60)",
+                end: "rgb(75, 255, 160)",
+                speed: {
+                    min: 0.03,
+                    max: 0.06
+                }
             }
         },
-        blur: 0
-    },
-    active: {
-        size: -0.4,
-        pos: {
-            x: 0,
-            y: 0
-        },
-        velocity: {
-            x: 0,
-            y: 0.05
-        },
-        blur: 0
+        con: {
+            size: -0.4,
+            velocity: {
+                x: 0,
+                y: 0.05
+            }
+        }
     }
-};
+}
 
 // FIREWORKS TRAIL
 export let fireworkTrailData = {
@@ -307,7 +305,7 @@ export let fireworkTrailData = {
     // Includes the information about the rate at which the particles get spawned
     fountain: {
         // Things that get read every time we are about to spawn a new particle
-        const: {
+        con: {
             // The chance tha the particle would indeed get spawned
             chance: 1,
             // How many particles get spawned each time we get through the chance
@@ -345,7 +343,7 @@ export let fireworkTrailData = {
             blur: 0
         },
         // Variables used to change the variables that were assigned to the particle at the start
-        const: {
+        con: {
             size: 0,
             pos: {
                 x: {
@@ -369,57 +367,47 @@ export let fireworkTrailData = {
 // FIREWORKS
 export let fireworksData = {
     type: "fountain",
-    pre: {
-        amount: 1,
-        chance: 0.01,
-        spawnsLeft: -1,
-        startAmount: 0
+    fountain: {
+        con: {
+            chance: 0.02,
+        }
     },
-    spawn: {
-        size: 10,
-        life: {
-            min: 70,
-            max: 90,
-        },
-        pos: {
-            x: {
-                min: 600,
-                max: 650
+    particle: {
+        val: {
+            size: 10,
+            life: {
+                min: 70,
+                max: 90,
             },
-            y: 600
+            pos: {
+                x: {
+                    min: 350,
+                    max: 650
+                },
+                y: 600
+            },
+            speed: {
+                min: 8,
+                max: 10
+            },
+            angle: {
+                min: Math.PI + Math.PI / 2 - Math.PI / 16,
+                max: Math.PI + Math.PI / 2 + Math.PI / 16
+            },
+            color: {
+                start: "rgb(190, 80, 30, 0.4)",
+                end: "rgb(220, 180, 40, 1)",
+                speed: 0.01
+            }
         },
-        speed: {
-            min: 8,
-            max: 10
+        con: {
+            velocity: {
+                y: 0.1
+            }
         },
-        angle: {
-            min: Math.PI + Math.PI / 2 - Math.PI / 16,
-            max: Math.PI + Math.PI / 2 + Math.PI / 16
-        },
-        color: {
-            start: "rgb(255, 255, 0, 0)",
-            end: "rgb(240, 50, 40, 1)",
-            speed: 0.01
-        },
-        blur: 0
-    },
-    active: {
-        size: {
-            min: 0,
-            max: 0
-        },
-        pos: {
-            x: 0,
-            y: 0
-        },
-        velocity: {
-            x: 0,
-            y: 0.1
-        },
-        blur: 0
-    },
-    newData: {
-        death: explosionData,
-        trail: fireworkTrailData
+        newData: {
+            death: explosionData,
+            trail: fireworkTrailData
+        }
     }
 };

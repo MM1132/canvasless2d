@@ -11,33 +11,20 @@ export default class Particle {
     // The chance of shapes/sizes
 
     #canvas
+
+    #val
+    #con
     #newData
-    #pos
-    #life
-    #size
-    #velocity
-    #color
-    #colorChange
-    #blur
-    
-    #active
+
     #particle
 
-    constructor(canvas, spawn, active, newData) {
+    constructor(canvas, val, con, newData) {
         this.#canvas = canvas
 
+        this.#val = val
+        this.#con = con
+
         this.#newData = newData
-
-        this.#pos = spawn.pos
-        this.#life = spawn.life
-        this.#size = spawn.size
-        this.#velocity = spawn.velocity
-        this.#color = spawn.color.start
-        this.#colorChange = spawn.color.change
-        this.#blur = spawn.blur
-
-        // DeepCopy all the data
-        this.#active = active
 
         // Create the particle in html
         this.#particle = document.createElement("div")
@@ -50,7 +37,7 @@ export default class Particle {
         this.#canvas.removeChild(this.#particle)
     
     get pos() {
-        return this.#pos
+        return this.#val.pos
     }
 
     get newData() {
@@ -59,40 +46,39 @@ export default class Particle {
 
     update = _ => {
         // Update color
-        this.#color.r += this.#colorChange.r
-        this.#color.g += this.#colorChange.g
-        this.#color.b += this.#colorChange.b
-        this.#color.a += this.#colorChange.a
+        this.#val.color.r += this.#val.color.change.r
+        this.#val.color.g += this.#val.color.change.g
+        this.#val.color.b += this.#val.color.change.b
+        this.#val.color.a += this.#val.color.change.a
 
         // Update velocity
-        this.#velocity.x += readParameter(this.#active.velocity.x)
-        this.#velocity.y += readParameter(this.#active.velocity.y)
+        this.#val.velocity.x += readParameter(this.#con.velocity.x)
+        this.#val.velocity.y += readParameter(this.#con.velocity.y)
 
         // Change position
-        this.#pos.x += readParameter(this.#active.pos.x) + this.#velocity.x
-        this.#pos.y += readParameter(this.#active.pos.y) + this.#velocity.y
-
+        this.#val.pos.x += readParameter(this.#con.pos.x) + this.#val.velocity.x
+        this.#val.pos.y += readParameter(this.#con.pos.y) + this.#val.velocity.y
         // Update the life
-        this.#life--
+        this.#val.life--
 
-        this.#blur += readParameter(this.#active.blur)
+        this.#val.blur += readParameter(this.#con.blur)
 
         // Update the size
-        this.#size += readParameter(this.#active.size)
+        this.#val.size += readParameter(this.#con.size)
 
         // Check if needed to delete
-        if(this.#life <= 0 || this.#size <= 0) {
+        if(this.#val.life <= 0 || this.#val.size <= 0) {
             // Just remove ourselves from the html
             this.#particle.parentNode.removeChild(this.#particle)
             return { action: "delete" }
         }
 
-        this.#particle.style.backgroundColor = dictToRgbaString(this.#color)
-        this.#particle.style.filter = `blur(${this.#blur}px)`
-        this.#particle.style.width = `${this.#size}px`
-        this.#particle.style.height = `${this.#size}px`
-        this.#particle.style.left = `${this.#pos.x-this.#size/2}px`
-        this.#particle.style.top = `${this.#pos.y-this.#size/2}px`
+        this.#particle.style.backgroundColor = dictToRgbaString(this.#val.color)
+        this.#particle.style.filter = `blur(${this.#val.blur}px)`
+        this.#particle.style.width = `${this.#val.size}px`
+        this.#particle.style.height = `${this.#val.size}px`
+        this.#particle.style.left = `${this.#val.pos.x-this.#val.size/2}px`
+        this.#particle.style.top = `${this.#val.pos.y-this.#val.size/2}px`
 
         // Everything went well, particle still remains existing
         return false

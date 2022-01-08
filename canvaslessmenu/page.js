@@ -30,6 +30,10 @@ export default class Page {
         this.hide()
     }
 
+    get particleCount() {
+        return this.#fountainManager.particleCount
+    }
+
     show = _ =>
         this.#canvas.appendChild(this.#pageCanvas)
 

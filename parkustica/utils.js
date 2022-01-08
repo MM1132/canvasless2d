@@ -17,14 +17,14 @@ export const rgbaChange = color => {
     let endColor = rgbaStringToDict(color.end)
 
     return {
-        start: startColor,
+        ...startColor,
         change: {
             r: readParameter(color.speed) * (endColor.r - startColor.r),
             g: readParameter(color.speed) * (endColor.g - startColor.g),
             b: readParameter(color.speed) * (endColor.b - startColor.b),
             a: readParameter(color.speed) * (endColor.a - startColor.a)
         }
-    };
+    }
 }
 
 let rgbaStringToDict = rgbStr => {
@@ -51,7 +51,7 @@ export const assignObject = (thisData, data) => {
     for(const i of Object.keys(data)) {
         if(i in thisData) {
             // Only if they both are objects
-            if(typeof thisData[i] == "object" && typeof data[i] == "object") {
+            if(typeof thisData[i] == "object" && typeof data[i] == "object" && thisData[i] != null) {
                 assignObject(thisData[i], data[i])
             } else { // Otherwise, assign
                 thisData[i] = data[i]

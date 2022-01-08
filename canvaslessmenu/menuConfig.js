@@ -1,7 +1,7 @@
 let fireData1 = {
     type: "fountain",
     fountain: {
-        const: {
+        con: {
             chance: 1,
             count: 1
         },
@@ -30,7 +30,7 @@ let fireData1 = {
                 speed: 0.01
             }
         },
-        const: {
+        con: {
             pos: {
                 x: {
                     min: -3,
