@@ -18,20 +18,23 @@ export default class ParticleFountain {
             return
         }
 
-        // If there is no "pre", don't spawn any at the start
-        for(let i = 0; i < this.#data.pre?.count; i++) {
-            this.createNewParticle()
-        }
+        // Create the starting particles
+        this.createNewParticle()
     }
 
     createNewParticle = (data = this.#data) => {
-        // If there is the "pre" data, use it when creating the new particle
-        if(data.fountain.con.chance < Math.random()) {
+        // Check if pre has anything in it
+        let pre = JSON.parse(JSON.stringify(data?.pre || data.fountain.con))
+        if(data?.pre) {
+            delete data.pre
+        }
+
+        if(pre.chance < Math.random()) {
             return
         }
 
-        // Spawn the particle the number of time
-        for(let i = 0; i < data.fountain.con.count; i++) {
+        // Spawn the particle the number of times
+        for(let i = 0; i < pre.count; i++) {
             // Calcaute the starting values for the particle
             let spawn = {
                 pos: {
@@ -41,7 +44,7 @@ export default class ParticleFountain {
                 size: readParameter(data.particle.val.size),
                 life: readParameter(data.particle.val.life),
                 blur: readParameter(data.particle.val.blur),
-                color: rgbaChange(data.particle.val.color)
+                color: rgbaChange(data.particle.val.color[~~(data.particle.val.color.length * Math.random())])
             }
 
             // If we have angle, do it with the angle / else do it without
@@ -81,6 +84,7 @@ export default class ParticleFountain {
     clear = _ => this.#particleList = new Array()
 
     update = _ => {
+        
         // Check if we still need to spawn in new particles
         if(this.#data.fountain.val.spawnsLeft > 0 || this.#data.fountain.val.spawnsLeft == -1) {
             this.createNewParticle()
@@ -108,7 +112,7 @@ export default class ParticleFountain {
                 // If there is death data of type fountain
                 if(this.#particleList[i].newData?.death.type == "fountain") {
                     this.#particleList[i].newData.death.particle.val.pos = this.#particleList[i].pos
-                    newFountainData.fountains.push(this.#particleList[i].newData.death)
+                    newFountainData.fountains.push(JSON.parse(JSON.stringify(this.#particleList[i].newData.death)))
                 } else if(this.#particleList[i].newData?.death.type == "particle") {
                     this.#particleList[i].newData.death.particle.val.pos = this.#particleList[i].pos
                     this.createNewParticle(this.#particleList[i].newData.death)

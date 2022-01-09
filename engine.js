@@ -11,7 +11,6 @@ export default class Engine {
 
         this.#stack = new Array()
 
-        this.#game = new Game(this.#canvas)
         this.#mainMenu = new Menu(this.#canvas, mainMenu)
         this.#pauseMenu = new Menu(this.#canvas, pauseMenu)
 

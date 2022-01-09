@@ -273,14 +273,24 @@ export let explosionData = {
                 min: 0.2,
                 max: 7
             },
-            color: {
-                start: "rgb(255, 220, 60)",
-                end: "rgb(75, 255, 160)",
-                speed: {
-                    min: 0.03,
-                    max: 0.06
+            color: [
+                {
+                    start: "rgb(255, 220, 60)",
+                    end: "rgb(75, 255, 160)",
+                    speed: {
+                        min: 0.03,
+                        max: 0.06
+                    }
+                },
+                {
+                    start: "rgb(200, 10, 100)",
+                    end: "rgb(255, 160, 250)",
+                    speed: {
+                        min: 0.03,
+                        max: 0.06
+                    }
                 }
-            }
+            ]
         },
         con: {
             size: -0.4,
@@ -322,7 +332,7 @@ export let fireworkTrailData = {
     particle: {
         // Variables that get assigned to the particle at the start of its life
         val: {
-            size: 2,
+            size: 5,
             life: {
                 min: 10,
                 max: 60,
@@ -335,11 +345,18 @@ export let fireworkTrailData = {
                 x: 0,
                 y: 0
             },
-            color: {
-                start: "rgb(255, 230, 50, 1)",
-                end: "rgb(20, 170, 0, 0)",
-                speed: 0.02
-            },
+            color: [
+                {
+                    start: "rgb(255, 230, 50, 1)",
+                    end: "rgb(20, 170, 0, 0)",
+                    speed: 0.02
+                },
+                {
+                    start: "rgb(100, 160, 50, 1)",
+                    end: "rgb(20, 170, 0, 0)",
+                    speed: 0.02
+                }
+            ],
             blur: 0
         },
         // Variables used to change the variables that were assigned to the particle at the start
@@ -369,7 +386,7 @@ export let fireworksData = {
     type: "fountain",
     fountain: {
         con: {
-            chance: 0.02,
+            chance: 0.02
         }
     },
     particle: {
@@ -377,12 +394,12 @@ export let fireworksData = {
             size: 10,
             life: {
                 min: 70,
-                max: 90,
+                max: 90
             },
             pos: {
                 x: {
-                    min: 350,
-                    max: 650
+                    min: 300,
+                    max: 700
                 },
                 y: 600
             },
@@ -394,11 +411,13 @@ export let fireworksData = {
                 min: Math.PI + Math.PI / 2 - Math.PI / 16,
                 max: Math.PI + Math.PI / 2 + Math.PI / 16
             },
-            color: {
-                start: "rgb(190, 80, 30, 0.4)",
-                end: "rgb(220, 180, 40, 1)",
-                speed: 0.01
-            }
+            color: [
+                {
+                    start: "rgb(190, 80, 30, 0)",
+                    end: "rgb(220, 180, 40, 0)",
+                    speed: 0
+                }
+            ]
         },
         con: {
             velocity: {

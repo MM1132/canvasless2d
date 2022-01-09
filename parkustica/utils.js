@@ -47,15 +47,19 @@ export const dictToRgbaString = dict => `rgba(${Math.floor(dict.r)}, ${Math.floo
 
 // Assigns all the values of data to thisData
 export const assignObject = (thisData, data) => {
-    // They both must be of type Object
+    // Assuming that data is an object, loop through its keys
     for(const i of Object.keys(data)) {
-        if(i in thisData) {
-            // Only if they both are objects
-            if(typeof thisData[i] == "object" && typeof data[i] == "object" && thisData[i] != null) {
+        // If thisData also has the property
+        if(thisData[i]) {
+            // Make sure they are both objects
+            if(typeof thisData[i] == "object" && typeof data[i] == "object") {
                 assignObject(thisData[i], data[i])
             } else { // Otherwise, assign
                 thisData[i] = data[i]
             }
+        } else { // If thisData doesn't have the property yet
+            // Assign the property to it
+            thisData[i] = data[i]
         }
     }
 }
