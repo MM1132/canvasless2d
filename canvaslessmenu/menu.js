@@ -14,11 +14,11 @@ export default class Menu {
 
         // Now let's also create the global particle thingies
         this.#fountainManager = new FountainManager(this.#menuCanvas)
-        /* if("particleFountains" in config.global) {
+        if("particleFountains" in config.global) {
             for(let i of config.global.particleFountains) {
                 this.#fountainManager.createNewFountain(i)
             }
-        } */
+        }
 
         this.#activePage = "main"
         this.#pages = new Object()

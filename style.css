@@ -1,8 +1,26 @@
-#canvas {
-    position: relative;
-    width: 1000px;
-    height: 600px;
-    border: 1px solid black;
-    margin: auto;
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-image: url('background.png');
+    background-size: 200px;
+    image-rendering: pixelated;
+}
+
+#game-container {
     background: black;
+    height: 640px;
+    margin: auto;
+    margin-top: 20px;
+    transform-origin: top center;
+    aspect-ratio: 1 / 2;
+}
+
+.canvas {
+    width: inherit;
+    height: inherit;
+    overflow: hidden;
+    position: relative;
 }

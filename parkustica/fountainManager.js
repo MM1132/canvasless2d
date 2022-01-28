@@ -1,7 +1,9 @@
 import ParticleFountain from "./particlefountain.js"
 
 export default class FountainManager {
-    #canvas; #fountainList;
+    #canvas
+
+    #fountainList
 
     constructor(canvas) {
         this.#canvas = canvas

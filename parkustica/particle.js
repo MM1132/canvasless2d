@@ -30,11 +30,10 @@ export default class Particle {
         this.#particle = document.createElement("div")
         this.#particle.style.position = "absolute"
         this.#particle.style.borderRadius = "100%"
-        this.#canvas.appendChild(this.#particle)
+        this.#canvas.getCanvas().appendChild(this.#particle)
     }
 
-    hide = _ =>
-        this.#canvas.removeChild(this.#particle)
+    hide = _ => this.#canvas.getCanvas().removeChild(this.#particle)
     
     get pos() {
         return this.#val.pos

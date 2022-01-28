@@ -1,57 +1,42 @@
 import FountainManager from "./parkustica/fountainManager.js"
 import { rainData, cloudData, fireData, fireworksData } from "./parkustica/particlePresets.js"
-import { createSubCanvas } from "./canvaslessmenu/utils.js"
-import CanvasContext from "./canvasless2d/canvascontext.js"
+import CL_Canvas from "./canvasless2d/cl_canvas.js";
+import Board from "./board.js"
 
 export default class Game {
-    #active; #paused; #canvas; #gameCanvas; #fountainManager; #cc; 
-    //#rect;
+    #container
+    #canvas
+    #fountainManager
+    #board
+    
+    #paused
+    #timer
 
-    constructor(canvas) {
-        this.#active = false
+    constructor(container) {
+        this.#timer = 0
+
+        // The element in which the canvas is going to be in
+        this.#container = container
+
+        // Create the canvas
+        this.#canvas = new CL_Canvas(this.#container)
+        this.show()
+
         this.#paused = false
 
-        // Mostly used for hide() and show()
-        this.#canvas = canvas
+        this.#board = new Board(this.#canvas)
 
-        // This canvas shall receive all the shit we render in the game
-        this.#gameCanvas = createSubCanvas(this.#canvas)
-
-        // Pause menu thingy
-        window.addEventListener("keydown", (e) => {
-            if(this.#active) {
-                if(e.key == "Escape") {
-                    this.#paused = true
-                }
-            }
-        });
-
-        this.#fountainManager = new FountainManager(this.#gameCanvas)
-        //this.#fountainManager.createNewFountain(JSON.parse(JSON.stringify(rainData)))
-        //this.#fountainManager.createNewFountain(JSON.parse(JSON.stringify(cloudData)))
-        //this.#fountainManager.createNewFountain(JSON.parse(JSON.stringify(fireData)))
-        this.#fountainManager.createNewFountain(JSON.parse(JSON.stringify(fireworksData)))
-
-        this.#cc = new CanvasContext(this.#canvas)
-        this.#cc.style.color = "rgb(20, 50, 200)"
-        //this.#rect = this.#cc.createRect(10, 10, 50, 50)
+        // The fountain for the fireworks
+        //this.#fountainManager = new FountainManager(this.#canvas)
+        //this.#fountainManager.createNewFountain(JSON.parse(JSON.stringify(fireworksData)))
     }
 
-    get particleCount() {
+    show = _ => this.#canvas.show()
+    hide = _ => this.#canvas.hide()
+
+    /* get particleCount() {
         return this.#fountainManager.particleCount
-    }
-
-    show = _ => {
-        this.#canvas.appendChild(this.#gameCanvas)
-        //this.#rect.show()
-        this.#active = true
-    }
-
-    hide = _ => {
-        this.#canvas.removeChild(this.#gameCanvas)
-        //this.#rect.hide()
-        this.#active = false
-    }
+    } */
 
     update = _ => {
         // Deal with the pausing
@@ -59,8 +44,15 @@ export default class Game {
             this.#paused = false
             return "paused"
         }
-        
+
         // Update all the things of the game
-        this.#fountainManager.update()
+        // this.#fountainManager.update()
+
+        this.#timer++
+        if(this.#timer > 60) {
+            this.#timer = 0
+
+            this.#board.update()
+        }
     }
 }

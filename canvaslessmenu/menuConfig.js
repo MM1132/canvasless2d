@@ -24,11 +24,13 @@ let fireData1 = {
                 x: 0,
                 y: -3.5
             },
-            color: {
-                start: "rgb(155, 0, 255)",
-                end: "rgb(255, 255, 0)",
-                speed: 0.01
-            }
+            color: [
+                {
+                    start: "rgb(155, 0, 255)",
+                    end: "rgb(255, 255, 0)",
+                    speed: 0.01
+                }
+            ]
         },
         con: {
             pos: {

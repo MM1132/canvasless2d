@@ -398,8 +398,8 @@ export let fireworksData = {
             },
             pos: {
                 x: {
-                    min: 300,
-                    max: 700
+                    min: 100,
+                    max: 150
                 },
                 y: 600
             },

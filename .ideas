@@ -1,0 +1,6 @@
+Create something like FountainCollection, which is a collection of fountains
+A fountain can be attached to either each particle that exists or dies
+
+Create the separate canvasContext class, which CL_Canvas can implement
+What if any of those CL_Canvas elements could have the possibiblity to do <anything>
+, but it is only up to us what we do with it
