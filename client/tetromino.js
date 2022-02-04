@@ -1,20 +1,21 @@
 import { PIECES } from "./pieces.js"
 
 export default class Tetromino {
-    #piece
     #pos
     #container
+
+    #name
+    #color
+    #tiles
 
     constructor(container) {
         this.#container = container
 
-        // Initialize the piece
-        /* let data = JSON.parse(JSON.stringify(PIECES[Math.floor(Math.random() * PIECES.length)]))
-        for(let i of data.tiles) {
-            for(let j of i) {
-                
-            }
-        } */
+        // Get a random piece
+        let data = JSON.parse(JSON.stringify(PIECES[Math.floor(Math.random() * PIECES.length)]))
+        this.#name = data.name
+        this.#color = data.color
+        this.#tiles = data.tiles
 
         this.#pos = {
             x: 5,

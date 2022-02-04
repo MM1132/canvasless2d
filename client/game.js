@@ -6,7 +6,6 @@ import Board from "./board.js"
 export default class Game {
     #container
     #canvas
-    #fountainManager
     #board
     
     #paused
@@ -25,18 +24,10 @@ export default class Game {
         this.#paused = false
 
         this.#board = new Board(this.#canvas)
-
-        // The fountain for the fireworks
-        //this.#fountainManager = new FountainManager(this.#canvas)
-        //this.#fountainManager.createNewFountain(JSON.parse(JSON.stringify(fireworksData)))
     }
 
     show = _ => this.#canvas.show()
     hide = _ => this.#canvas.hide()
-
-    /* get particleCount() {
-        return this.#fountainManager.particleCount
-    } */
 
     update = _ => {
         // Deal with the pausing
@@ -44,9 +35,6 @@ export default class Game {
             this.#paused = false
             return "paused"
         }
-
-        // Update all the things of the game
-        // this.#fountainManager.update()
 
         this.#timer++
         if(this.#timer > 60) {

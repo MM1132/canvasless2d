@@ -13,7 +13,6 @@ export default class Engine {
 
         // The game itself, that we are creating inside the container
         this.#game = new Game(this.#container)
-        // And then we are switching the screen to the game
 
         // This does not only append the element to the canvas, 
         // but it also pushes the reference to that element to the stack

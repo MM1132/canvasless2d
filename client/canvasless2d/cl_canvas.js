@@ -19,7 +19,7 @@ export default class CL_Canvas {
     show = _ => this.#container.appendChild(this.#canvas)
     hide = _ => this.#container.removeChild(this.#canvas)
 
-    // createRect = (x, y, width, height) => new Rect(this.#canvas, this.style, x, y, width, height)
+    createRect = (x, y, width, height) => new Rect(this.#canvas, this.style, x, y, width, height)
 
     // createImage = (url) => new CL_Image(url)
 }

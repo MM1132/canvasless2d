@@ -13,8 +13,6 @@ window.addEventListener('resize', _ => {
     // Calculate the multiplier
     let multiplier = sh / 640
 
-    let chh = ((multiplier * 640) / 2)
-
     // Set the transforms
     container.style.transform = `scale(${multiplier})`
 })
